@@ -44,8 +44,8 @@ gsSh= single_shot(gamedfmf[24,])
 
 ggplot(gsSh) +
   annotate_pitch(
-    colour = "black",
-    fill   = "white",
+    colour = "white",
+    fill   = "green",
     limits = FALSE,
     dimensions = pitch_statsbomb
   ) +
