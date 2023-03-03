@@ -27,5 +27,15 @@ disttogoal <- function(a){
   return(nam)
 }
 
+dist2d <- function(a,b,c) {
+  v1 <- b - c
+  v2 <- a - b
+  m <- cbind(v1,v2)
+  d <- abs(det(m))/sqrt(sum(v1*v1))
+  return(d)
+} 
+
+
+
 rad2deg <- function(rad) {(rad * 180) / (pi)}
 
