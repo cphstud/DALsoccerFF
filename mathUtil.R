@@ -15,6 +15,7 @@ mangle <- function(a){
   return(retval)
 }
 
+
 disttorecip <- function(a,b){
   ab = as.matrix(c((b[1]-a[1]),(b[2]-a[2])))
   nab=norm(ab,type="2")
