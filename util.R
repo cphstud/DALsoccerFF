@@ -3,6 +3,7 @@ library(jsonlite)
 library(tidyverse)
 library(ggplot2)
 library(ggsoccer)
+library(data.table)
 
 # hente database fra mongo ned i R
 con <- mongo(
@@ -10,7 +11,7 @@ con <- mongo(
   db="statsbomb",
   collection = "events"
 )
-conm <- mongo(
+cong <- mongo(
   url = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2",
   db="statsbomb",
   collection = "games"
@@ -22,9 +23,42 @@ conc <- mongo(
   collection = "competitions"
 )
 
-get_all_games <- function(leageid) {
+conm <- mongo(
+  url = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2",
+  db="statsbomb",
+  collection = "matches"
+)
+
+get_all_competitions <- function() {
   df <- conc$find('{}')
+  df <- df %>% select(c(1,2,3,4,5))
+  df <- df %>% unite(col="compname",remove = F)
   return(df)
+}
+
+get_all_matches <- function(compid, seasid) {
+  if(missing(seasid)) {
+    q = paste0('{"competition.competition_id":',compid,'}')
+  } else {
+    q = paste0('{"competition.competition_id":',compid,',
+               "season.season_id":',seasid,'}')
+  }
+  df <- conm$find(
+    query = q,
+    fields = ('{
+             "match_id":true, 
+             "match_date":true, 
+             "kick_off":true, 
+             "home_team.home_team_name":true, 
+             "home_team.country":true, 
+             "competition.competition_name":true, 
+             "away_team.away_team_name":true, 
+             "home_score":true, 
+             "away_score":true, 
+             "stadium.name":true 
+    }')
+    )
+  return(df %>% as.data.table() %>% select(-"X_id"))
 }
 
 get_shots <- function(m_id) {
