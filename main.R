@@ -1,13 +1,17 @@
 source("util.R")
 source("mathUtil.R")
+shinyApp(ui, server)
 
 gamedfmf<-get_shots(19748)
 ts=clean_shots(gamedfmf)
+ss=single_shot_ff(gamedfmf[6,])
+
+
 
 
 
 #PLOT ALL SHOTS
-ggplot(ts) +
+ggplot(ts[c(6),]) +
   annotate_pitch(
     colour = "white",
     fill   = "springgreen4",
@@ -15,6 +19,8 @@ ggplot(ts) +
     dimensions = pitch_statsbomb
   ) +
   geom_point(aes(x=x,y=y,color=team),size=3)+
+  geom_point(data=ss,aes(x=x,y=y,color=teammate),size=3)+
+  geom_text(aes(x=x,y=y,label=player))+
   geom_segment(aes(x = x, y = y, xend = x2, yend = y2,color=team),
                arrow = arrow(length = unit(0.15, "cm"),
                              type = "closed")) +
@@ -41,12 +47,13 @@ gsSh= single_shot(gamedfmf[22,])
 gsFF= single_shot_ff(gamedfmf[24,])
 gsSh= single_shot(gamedfmf[24,])
 
-
+0000000000000000
 ggplot(gsSh) +
   annotate_pitch(
     colour = "white",
     fill   = "green",
-    limits = FALSE,
+    limits = FALSE000000000000000000000000000000,
+    00000000000000000000000000
     dimensions = pitch_statsbomb
   ) +
   geom_point(aes(x=x,y=y),size=3)+

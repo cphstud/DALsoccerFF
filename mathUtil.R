@@ -37,6 +37,11 @@ dist2d <- function(a,b,c) {
 } 
 
 
+oppInTri <- function (s,p) {
+  
+}
+
+
 
 rad2deg <- function(rad) {(rad * 180) / (pi)}
 

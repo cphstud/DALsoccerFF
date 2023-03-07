@@ -10,6 +10,22 @@ con <- mongo(
   db="statsbomb",
   collection = "events"
 )
+conm <- mongo(
+  url = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2",
+  db="statsbomb",
+  collection = "games"
+)
+
+conc <- mongo(
+  url = "mongodb://127.0.0.1:27017/?directConnection=true&serverSelectionTimeoutMS=2000&appName=mongosh+1.6.2",
+  db="statsbomb",
+  collection = "competitions"
+)
+
+get_all_games <- function(leageid) {
+  df <- conc$find('{}')
+  return(df)
+}
 
 get_shots <- function(m_id) {
   df <- con$find(query = paste0('{"type.name" : "Shot" ,"matchid": ', m_id, '}'))
