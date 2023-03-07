@@ -1,12 +1,9 @@
 source("util.R")
 source("mathUtil.R")
-shinyApp(ui, server)
 
 gamedfmf<-get_shots(19748)
 ts=clean_shots(gamedfmf)
 ss=single_shot_ff(gamedfmf[6,])
-
-
 
 
 
@@ -47,13 +44,11 @@ gsSh= single_shot(gamedfmf[22,])
 gsFF= single_shot_ff(gamedfmf[24,])
 gsSh= single_shot(gamedfmf[24,])
 
-0000000000000000
 ggplot(gsSh) +
   annotate_pitch(
     colour = "white",
     fill   = "green",
-    limits = FALSE000000000000000000000000000000,
-    00000000000000000000000000
+    limits = FALSE,
     dimensions = pitch_statsbomb
   ) +
   geom_point(aes(x=x,y=y),size=3)+
