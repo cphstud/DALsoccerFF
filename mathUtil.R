@@ -29,6 +29,7 @@ disttogoal <- function(a){
 }
 
 dist2d <- function(a,b,c) {
+  # from a to line mellem b and c
   v1 <- b - c
   v2 <- a - b
   m <- cbind(v1,v2)
@@ -36,9 +37,36 @@ dist2d <- function(a,b,c) {
   return(d)
 } 
 
+area <- function(x1,y1,x2,y2,x3,y3) {
+    val=abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0)
+    return(val)
+  }
 
-oppInTri <- function (s,p) {
-  
+areaTriToGoal <- function(x1,y1) {
+    x2=120
+    y2=36
+    x3=120
+    y3=44
+    
+    val=abs((x1 * (y2 - y3) + x2 * (y3 - y1) + x3 * (y1 - y2)) / 2.0)
+    return(val)
+}
+
+oppInTri <- function (x1,y1,x,y) {
+    x2=120
+    y2=36
+    x3=120
+    y3=44
+    # Calculate area of triangle ABC
+    A = area(x1, y1, x2, y2, x3, y3)
+    # Calculate area of triangle PBC
+    A1 = area (x, y, x2, y2, x3, y3)
+    # Calculate area of triangle PAC
+    A2 = area (x1, y1, x, y, x3, y3)
+    # Calculate area of triangle PAB
+    A3 = area (x1, y1, x2, y2, x, y)
+    retval=ifelse(A == A1 + A2 + A3,T,F)
+    return(retval)
 }
 
 
